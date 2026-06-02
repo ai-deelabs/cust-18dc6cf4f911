@@ -82,7 +82,8 @@
   .btn-ghost{border-color:var(--aubergine);color:var(--aubergine)}
   .btn-ghost:hover{background:var(--aubergine);color:var(--ivory)}
   .nav .btn{padding:12px 26px}
-  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--aubergine)}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--aubergine);padding:4px;line-height:0}
+  .nav-cta{display:none}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;padding:200px 0 130px;overflow:hidden}
@@ -231,10 +232,37 @@
     .booking-card .pic img{position:static}
     .booking-card .copy{padding:54px 40px}
   }
+  /* nav collapses to a hamburger menu */
+  @media(max-width:860px){
+    .menu-toggle{display:block}
+    .nav>.btn-solid{display:none}
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:0;
+      background:rgba(250,246,239,.98);backdrop-filter:blur(12px);
+      padding-top:0;padding-bottom:0;padding-left:32px;padding-right:32px;
+      max-height:0;overflow:hidden;
+      box-shadow:0 1px 0 var(--line);
+      transition:max-height .45s ease, padding .45s ease;
+    }
+    header.nav-open{background:rgba(250,246,239,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+    header.nav-open .nav-links{max-height:360px;padding-top:10px;padding-bottom:24px;border-top:1px solid var(--line)}
+    .nav-links a{padding:15px 0;font-size:.9rem;border-bottom:1px solid var(--line)}
+    .nav-links a::after{display:none}
+    .nav-cta{
+      display:block;margin-top:18px;text-align:center;border-bottom:none;
+      background:var(--clay);color:var(--ivory);border-radius:40px;
+      padding:14px 0;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;
+      transition:background .35s ease;
+    }
+    .nav-cta:hover{background:var(--clay-deep)}
+    .menu-toggle .ic-close{display:none}
+    header.nav-open .menu-toggle .ic-open{display:none}
+    header.nav-open .menu-toggle .ic-close{display:inline-block}
+  }
   @media(max-width:640px){
     .wrap{padding:0 22px}
-    .nav-links{display:none}
-    .menu-toggle{display:block}
+    .nav-links{padding-left:22px;padding-right:22px}
     .rituals .grid,.steps .grid{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr}
     .phil-imgs{gap:12px}
@@ -251,18 +279,19 @@
 <header id="header">
   <div class="wrap nav">
     <div class="logo">Super Spa<span data-lang-th="วิถีสุขภาวะแบบไทย" data-lang-en="Thai Wellness Retreat">วิถีสุขภาวะแบบไทย</span></div>
-    <nav class="nav-links">
+    <nav class="nav-links" id="nav-links">
       <a href="#philosophy" data-lang-th="ปรัชญา" data-lang-en="Philosophy">ปรัชญา</a>
       <a href="#rituals" data-lang-th="ทรีตเมนต์" data-lang-en="Rituals">ทรีตเมนต์</a>
       <a href="#journey" data-lang-th="เส้นทาง" data-lang-en="The Journey">เส้นทาง</a>
       <a href="#book" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+      <a href="#book" class="nav-cta" data-lang-th="จองคิว" data-lang-en="Reserve">จองคิว</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language switcher">
       <button type="button" data-set-lang="th">TH</button>
       <button type="button" data-set-lang="en">EN</button>
     </div>
     <a href="#book" class="btn btn-solid"><span data-lang-th="จองคิว" data-lang-en="Reserve">จองคิว</span> <i data-lucide="arrow-up-right"></i></a>
-    <button class="menu-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i data-lucide="menu" class="ic-open"></i><i data-lucide="x" class="ic-close"></i></button>
   </div>
 </header>
 
@@ -488,6 +517,15 @@
   // header scroll state
   const header=document.getElementById('header');
   window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>40)});
+
+  // mobile menu toggle
+  const menuToggle=document.querySelector('.menu-toggle');
+  const closeMenu=()=>{header.classList.remove('nav-open');menuToggle.setAttribute('aria-expanded','false')};
+  menuToggle.addEventListener('click',()=>{
+    const open=header.classList.toggle('nav-open');
+    menuToggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.querySelectorAll('#nav-links a').forEach(a=>a.addEventListener('click',closeMenu));
 
   // reveal on scroll
   const obs=new IntersectionObserver((entries)=>{
