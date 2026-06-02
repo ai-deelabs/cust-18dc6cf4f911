@@ -1,0 +1,30 @@
+{
+  "slug": "cust-18dc6cf4f911",
+  "brand_dna": "Super Spa is a wellness business focusing on relaxation and rejuvenation. The desired look and feel is a Thai-inspired, soothing style that embodies tranquility and comfort, appealing to clients seeking a calming experience. The brand aims to create a serene and inviting atmosphere with natural visuals and soft tones.",
+  "variant_count": 3,
+  "client_id": null,
+  "tags": [
+    "thai",
+    "relaxing",
+    "wellness"
+  ],
+  "generated_at": "2026-06-02T02:56:23Z",
+  "prompt_template": "variant.md",
+  "actions": [
+    {
+      "type": "generate",
+      "at": "2026-06-02T02:59:29Z",
+      "variants": {
+        "v1": {
+          "size_bytes": 22526
+        },
+        "v2": {
+          "size_bytes": 30686
+        },
+        "v3": {
+          "size_bytes": 24371
+        }
+      }
+    }
+  ]
+}

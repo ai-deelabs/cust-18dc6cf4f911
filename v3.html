@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Spa — Stillness, Restored</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+  :root{
+    --clay:#a8674e;
+    --clay-deep:#8a4f3a;
+    --aubergine:#3d2a3a;
+    --sand:#e7ddcf;
+    --sand-light:#f3ece1;
+    --ivory:#faf6ef;
+    --mauve:#b89aa3;
+    --ink:#2c2522;
+    --muted:#7a6f66;
+    --line:rgba(60,42,58,.14);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--ivory);
+    line-height:1.7;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.12;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.42em;
+    text-transform:uppercase;font-weight:400;color:var(--clay);
+    display:inline-flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--clay);opacity:.6}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+    padding:26px 0;
+  }
+  header.scrolled{background:rgba(250,246,239,.92);backdrop-filter:blur(12px);padding:16px 0;box-shadow:0 1px 0 var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--serif);font-size:1.7rem;font-weight:600;letter-spacing:.04em;color:var(--aubergine);line-height:1}
+  .logo span{display:block;font-family:var(--sans);font-size:.56rem;letter-spacing:.46em;text-transform:uppercase;color:var(--clay);font-weight:400;margin-top:3px}
+  .nav-links{display:flex;gap:40px;align-items:center}
+  .nav-links a{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);position:relative;padding:4px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--clay);transition:width .35s ease}
+  .nav-links a:hover::after{width:100%}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:400;
+    padding:14px 30px;border-radius:40px;transition:.35s ease;cursor:pointer;border:1px solid transparent;
+  }
+  .btn-solid{background:var(--clay);color:var(--ivory)}
+  .btn-solid:hover{background:var(--clay-deep)}
+  .btn-ghost{border-color:var(--aubergine);color:var(--aubergine)}
+  .btn-ghost:hover{background:var(--aubergine);color:var(--ivory)}
+  .nav .btn{padding:12px 26px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--aubergine)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:200px 0 130px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;top:-15%;right:-12%;width:620px;height:620px;
+    background:radial-gradient(circle,rgba(184,154,163,.30),transparent 65%);border-radius:50%;z-index:0;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;position:relative;z-index:1}
+  .hero h1{font-size:clamp(3rem,7vw,5.6rem);color:var(--aubergine);margin:26px 0 0}
+  .hero h1 em{font-style:italic;color:var(--clay);display:block}
+  .hero p{font-size:1.08rem;color:var(--muted);max-width:430px;margin:28px 0 38px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-stats{display:flex;gap:42px;margin-top:64px;padding-top:36px;border-top:1px solid var(--line)}
+  .hero-stats .num{font-family:var(--serif);font-size:2.4rem;color:var(--clay);line-height:1}
+  .hero-stats .lbl{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  .hero-visual{position:relative}
+  .hero-visual .frame{
+    border-radius:230px 230px 24px 24px;overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(61,42,58,.45);
+  }
+  .hero-visual .frame img{width:100%;height:600px;object-fit:cover;filter:saturate(.92) contrast(1.02)}
+  .hero-badge{
+    position:absolute;bottom:34px;left:-34px;background:var(--ivory);
+    padding:20px 26px;border-radius:18px;box-shadow:0 20px 50px -18px rgba(61,42,58,.35);
+    display:flex;align-items:center;gap:16px;z-index:2;
+  }
+  .hero-badge i{color:var(--clay)}
+  .hero-badge .t{font-family:var(--serif);font-size:1.15rem;color:var(--aubergine);line-height:1.1}
+  .hero-badge .s{font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+
+  /* ---------- MARQUEE STRIP ---------- */
+  .strip{background:var(--aubergine);color:var(--sand);padding:22px 0;overflow:hidden;white-space:nowrap}
+  .strip-track{display:inline-flex;gap:60px;animation:slide 28s linear infinite}
+  .strip-track span{font-family:var(--serif);font-style:italic;font-size:1.25rem;display:inline-flex;align-items:center;gap:60px;color:var(--sand)}
+  .strip-track span::after{content:"·";color:var(--clay);font-style:normal}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION BASICS ---------- */
+  section{position:relative}
+  .pad{padding:120px 0}
+  .head{max-width:620px;margin-bottom:64px}
+  .head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .head.center .eyebrow::before{display:none}
+  .head h2{font-size:clamp(2.4rem,4.6vw,3.6rem);color:var(--aubergine);margin-top:18px}
+  .head p{color:var(--muted);margin-top:18px;font-size:1.05rem}
+
+  /* ---------- PHILOSOPHY ---------- */
+  .phil{background:var(--sand-light)}
+  .phil-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+  .phil-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:18px}
+  .phil-imgs img{width:100%;border-radius:16px;object-fit:cover;filter:saturate(.9)}
+  .phil-imgs img:nth-child(1){height:300px;border-radius:120px 16px 16px 16px}
+  .phil-imgs img:nth-child(2){height:220px;margin-top:50px}
+  .phil-imgs img:nth-child(3){height:200px}
+  .phil-imgs img:nth-child(4){height:280px;margin-top:-30px;border-radius:16px 16px 16px 120px}
+  .phil-text h2{font-size:clamp(2.2rem,4vw,3.2rem);color:var(--aubergine)}
+  .phil-text p{color:var(--muted);margin-top:22px}
+  .phil-list{margin-top:34px;display:flex;flex-direction:column;gap:20px}
+  .phil-list .item{display:flex;gap:18px;align-items:flex-start}
+  .phil-list .ic{flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--ivory);display:grid;place-items:center;color:var(--clay);box-shadow:inset 0 0 0 1px var(--line)}
+  .phil-list h4{font-size:1.25rem;color:var(--aubergine)}
+  .phil-list span{font-size:.95rem;color:var(--muted)}
+
+  /* ---------- RITUALS ---------- */
+  .rituals .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .card{
+    background:var(--ivory);border-radius:20px;overflow:hidden;border:1px solid var(--line);
+    transition:transform .45s ease, box-shadow .45s ease;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -34px rgba(61,42,58,.5)}
+  .card .ph{height:230px;overflow:hidden;position:relative}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;filter:saturate(.92)}
+  .card:hover .ph img{transform:scale(1.06)}
+  .card .ph .tag{position:absolute;top:16px;left:16px;background:rgba(250,246,239,.92);color:var(--clay);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:30px}
+  .card .body{padding:30px 28px 34px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-size:1.65rem;color:var(--aubergine)}
+  .card .body p{color:var(--muted);font-size:.96rem;margin:12px 0 22px;flex:1}
+  .card .meta{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--line)}
+  .card .price{font-family:var(--serif);font-size:1.5rem;color:var(--clay)}
+  .card .dur{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- QUOTE / FEATURE ---------- */
+  .feature{position:relative;color:var(--ivory);overflow:hidden}
+  .feature img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .feature::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(61,42,58,.92),rgba(138,79,58,.62));z-index:1}
+  .feature .wrap{position:relative;z-index:2;padding:130px 32px;max-width:860px;text-align:center;margin:0 auto}
+  .feature blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.9rem,4vw,3rem);line-height:1.3}
+  .feature .cite{margin-top:32px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sand)}
+  .feature .lotus{color:var(--mauve);margin-bottom:18px}
+
+  /* ---------- EXPERIENCE STEPS ---------- */
+  .steps .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:20px}
+  .step{text-align:center}
+  .step .ring{width:78px;height:78px;border-radius:50%;border:1px solid var(--clay);display:grid;place-items:center;margin:0 auto 22px;color:var(--clay);position:relative}
+  .step .ring .n{position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:var(--clay);color:var(--ivory);font-size:.72rem;display:grid;place-items:center;font-family:var(--sans)}
+  .step h4{font-size:1.35rem;color:var(--aubergine)}
+  .step p{color:var(--muted);font-size:.92rem;margin-top:10px}
+
+  /* ---------- CTA ---------- */
+  .booking{background:var(--sand-light)}
+  .booking-card{
+    background:var(--aubergine);border-radius:30px;overflow:hidden;
+    display:grid;grid-template-columns:1.1fr .9fr;align-items:stretch;
+    box-shadow:0 50px 90px -40px rgba(61,42,58,.6);
+  }
+  .booking-card .copy{padding:72px 64px;color:var(--ivory)}
+  .booking-card .copy h2{font-size:clamp(2.2rem,4vw,3.2rem);color:var(--ivory)}
+  .booking-card .copy h2 em{font-style:italic;color:var(--mauve)}
+  .booking-card .copy p{color:var(--sand);opacity:.85;margin:20px 0 34px;max-width:380px}
+  .booking-card .copy .row{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:.95rem;color:var(--sand)}
+  .booking-card .copy .row i{color:var(--clay);flex:0 0 auto}
+  .booking-card .pic{position:relative}
+  .booking-card .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .booking-card .btn-solid{background:var(--clay);margin-top:8px}
+  .booking-card .btn-solid:hover{background:#c07a5e}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--aubergine);color:var(--sand);padding:84px 0 36px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+  footer .logo{color:var(--ivory)}
+  footer .logo span{color:var(--mauve)}
+  footer p.intro{color:var(--sand);opacity:.7;margin-top:20px;max-width:280px;font-size:.95rem}
+  footer h5{font-family:var(--sans);font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mauve);margin-bottom:22px;font-weight:400}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  footer ul a{color:var(--sand);opacity:.8;font-size:.95rem;transition:.3s}
+  footer ul a:hover{opacity:1;color:var(--clay)}
+  .socials{display:flex;gap:14px;margin-top:24px}
+  .socials a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(231,221,207,.25);display:grid;place-items:center;color:var(--sand);transition:.3s}
+  .socials a:hover{background:var(--clay);border-color:var(--clay);color:var(--ivory)}
+  .foot-bottom{margin-top:60px;padding-top:28px;border-top:1px solid rgba(231,221,207,.18);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.84rem;color:var(--sand);opacity:.7}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease, transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero-grid,.phil-grid,.booking-card{grid-template-columns:1fr}
+    .rituals .grid{grid-template-columns:1fr 1fr}
+    .steps .grid{grid-template-columns:1fr 1fr;gap:44px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:40px}
+    .hero{padding:160px 0 90px}
+    .hero-visual{order:-1;max-width:480px;margin:0 auto}
+    .hero-visual .frame img{height:440px}
+    .booking-card .pic{height:280px}
+    .booking-card .pic img{position:static}
+    .booking-card .copy{padding:54px 40px}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 22px}
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .rituals .grid,.steps .grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .phil-imgs{gap:12px}
+    .phil-imgs img:nth-child(2),.phil-imgs img:nth-child(4){margin-top:0}
+    .hero-stats{gap:26px;flex-wrap:wrap}
+    .hero-badge{left:0;bottom:14px}
+    .feature .wrap{padding:90px 24px}
+    .pad{padding:80px 0}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <div class="logo">Super Spa<span>Thai Wellness Retreat</span></div>
+    <nav class="nav-links">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#rituals">Rituals</a>
+      <a href="#journey">The Journey</a>
+      <a href="#book">Contact</a>
+    </nav>
+    <a href="#book" class="btn btn-solid">Reserve <i data-lucide="arrow-up-right"></i></a>
+    <button class="menu-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Stillness, restored</span>
+      <h1>Breathe in <em>tranquility.</em></h1>
+      <p>A sanctuary of soft light and slow hours. Super Spa blends time-honored Thai rituals with the quiet luxury of doing nothing at all.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-solid">Book your escape <i data-lucide="arrow-right"></i></a>
+        <a href="#rituals" class="btn btn-ghost">Explore rituals</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="num">12+</div><div class="lbl">Signature rituals</div></div>
+        <div><div class="num">9k</div><div class="lbl">Calm guests</div></div>
+        <div><div class="num">4.9</div><div class="lbl">Guest rating</div></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="frame">
+        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=760&h=600&fit=crop" alt="Woman receiving a relaxing Thai spa massage">
+      </div>
+      <div class="hero-badge">
+        <i data-lucide="leaf"></i>
+        <div>
+          <div class="t">Herbal & calm</div>
+          <div class="s">100% natural oils</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="strip">
+  <div class="strip-track">
+    <span>Warm Compress</span><span>Lotus Ritual</span><span>Herbal Steam</span><span>Thai Massage</span><span>Aromatherapy</span><span>Stillness</span>
+    <span>Warm Compress</span><span>Lotus Ritual</span><span>Herbal Steam</span><span>Thai Massage</span><span>Aromatherapy</span><span>Stillness</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="phil pad" id="philosophy">
+  <div class="wrap phil-grid">
+    <div class="phil-imgs reveal">
+      <img src="https://images.unsplash.com/photo-1474557157379-8aa74a6ef541?w=420&h=300&fit=crop" alt="Pink lotus flower floating on still water">
+      <img src="https://images.unsplash.com/photo-1631277877896-4ce2b6770da5?w=420&h=220&fit=crop" alt="Stacked smooth zen stones">
+      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=420&h=200&fit=crop" alt="Amber glass bottle of essential oil">
+      <img src="https://images.unsplash.com/photo-1517200578024-62d131797ec8?w=420&h=280&fit=crop" alt="Close up of a green palm leaf">
+    </div>
+    <div class="phil-text reveal">
+      <span class="eyebrow">Our philosophy</span>
+      <h2>The art of unhurried care.</h2>
+      <p>Rooted in the Thai tradition of <em>sabai sabai</em> — a gentle ease of being — every treatment begins with breath and ends in quiet. We treat rest not as a luxury, but as a return to yourself.</p>
+      <div class="phil-list">
+        <div class="item">
+          <span class="ic"><i data-lucide="flower-2"></i></span>
+          <div><h4>Natural by nature</h4><span>Hand-blended herbal oils, botanicals, and warm compresses — nothing synthetic.</span></div>
+        </div>
+        <div class="item">
+          <span class="ic"><i data-lucide="hand-heart"></i></span>
+          <div><h4>Healing hands</h4><span>Therapists trained in authentic Thai bodywork passed down through generations.</span></div>
+        </div>
+        <div class="item">
+          <span class="ic"><i data-lucide="wind"></i></span>
+          <div><h4>Quiet spaces</h4><span>Soft light, slow music, and air scented with lemongrass and jasmine.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RITUALS -->
+<section class="rituals pad" id="rituals">
+  <div class="wrap">
+    <div class="head center reveal">
+      <span class="eyebrow">Signature rituals</span>
+      <h2>Treatments for body &amp; breath</h2>
+      <p>Each ritual is a slow ceremony — chosen to melt tension and quiet the mind.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1610402601271-5b4bd5b3eba4?w=520&h=460&fit=crop" alt="Traditional Thai massage treatment"><span class="tag">Bodywork</span></div>
+        <div class="body">
+          <h3>Royal Thai Massage</h3>
+          <p>A rhythmic dance of stretches and pressure points that restores flow and releases deep-held tension.</p>
+          <div class="meta"><span class="price">$120</span><span class="dur">90 min</span></div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=520&h=460&fit=crop" alt="Aromatherapy oils for treatment"><span class="tag">Aroma</span></div>
+        <div class="body">
+          <h3>Lotus Aroma Ritual</h3>
+          <p>Warm herbal oils and a gentle full-body massage scented with jasmine, lotus, and lemongrass.</p>
+          <div class="meta"><span class="price">$95</span><span class="dur">60 min</span></div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1631277877896-4ce2b6770da5?w=520&h=460&fit=crop" alt="Warm stones for hot stone therapy"><span class="tag">Warmth</span></div>
+        <div class="body">
+          <h3>Warm Stone Stillness</h3>
+          <p>Smooth heated stones glide along the body, easing muscle tension and inviting deep calm.</p>
+          <div class="meta"><span class="price">$110</span><span class="dur">75 min</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE QUOTE -->
+<section class="feature">
+  <img class="bg" src="https://images.unsplash.com/photo-1533335121856-52d185e85ec1?w=1400&h=700&fit=crop" alt="Lush tropical greenery">
+  <div class="wrap">
+    <div class="lotus"><i data-lucide="flower" style="width:38px;height:38px"></i></div>
+    <blockquote>"To rest is not to retreat — it is to remember the rhythm you were always meant to keep."</blockquote>
+    <div class="cite">The Super Spa Promise</div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="steps pad" id="journey">
+  <div class="wrap">
+    <div class="head center reveal">
+      <span class="eyebrow">The journey</span>
+      <h2>Four steps into stillness</h2>
+    </div>
+    <div class="grid">
+      <div class="step reveal">
+        <div class="ring"><i data-lucide="calendar-heart"></i><span class="n">1</span></div>
+        <h4>Arrive</h4>
+        <p>Step away from the noise and into soft light, warm tea, and a welcome foot ritual.</p>
+      </div>
+      <div class="step reveal">
+        <div class="ring"><i data-lucide="clipboard-list"></i><span class="n">2</span></div>
+        <h4>Attune</h4>
+        <p>A quiet conversation to understand your body, your mood, and the rest you need.</p>
+      </div>
+      <div class="step reveal">
+        <div class="ring"><i data-lucide="sparkles"></i><span class="n">3</span></div>
+        <h4>Unwind</h4>
+        <p>Surrender to skilled hands as your chosen ritual unfolds, unhurried and complete.</p>
+      </div>
+      <div class="step reveal">
+        <div class="ring"><i data-lucide="sunrise"></i><span class="n">4</span></div>
+        <h4>Renew</h4>
+        <p>Linger in the relaxation lounge with herbal infusions before returning, restored.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking pad" id="book">
+  <div class="wrap">
+    <div class="booking-card reveal">
+      <div class="copy">
+        <span class="eyebrow" style="color:var(--mauve)">Reserve your time</span>
+        <h2>Begin your <em>return</em> to calm.</h2>
+        <p>Spaces are kept intentionally few, so every guest receives our fullest attention. Reserve your ritual and let the world wait.</p>
+        <div class="row"><i data-lucide="map-pin"></i> 88 Riverside Lane, Garden District</div>
+        <div class="row"><i data-lucide="clock"></i> Daily · 9:00 AM – 9:00 PM</div>
+        <div class="row"><i data-lucide="phone"></i> +1 (555) 014–7720</div>
+        <div style="margin-top:34px"><a href="#book" class="btn btn-solid">Reserve now <i data-lucide="arrow-right"></i></a></div>
+      </div>
+      <div class="pic">
+        <img src="https://images.unsplash.com/photo-1633618309980-ad765f2cea20?w=620&h=620&fit=crop" alt="Serene spa pool with calming ambiance">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">Super Spa<span>Thai Wellness Retreat</span></div>
+        <p class="intro">A serene sanctuary where time slows and the body remembers how to rest.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+        </div>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#rituals">Rituals</a></li>
+          <li><a href="#journey">The Journey</a></li>
+          <li><a href="#book">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Rituals</h5>
+        <ul>
+          <li><a href="#rituals">Thai Massage</a></li>
+          <li><a href="#rituals">Aroma Ritual</a></li>
+          <li><a href="#rituals">Warm Stone</a></li>
+          <li><a href="#rituals">Herbal Steam</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <ul>
+          <li>88 Riverside Lane</li>
+          <li>Garden District</li>
+          <li>Daily · 9AM – 9PM</li>
+          <li>+1 (555) 014–7720</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Super Spa. All rights reserved.</span>
+      <span>Privacy · Terms · Gift Cards</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header=document.getElementById('header');
+  window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>40)});
+
+  // reveal on scroll
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*0.08)+'s';obs.observe(el)});
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
