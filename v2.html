@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Super Spa — Thai-Inspired Wellness & Rejuvenation</title>
+<title data-lang-th="Super Spa — สปาเพื่อสุขภาพและการฟื้นฟูสไตล์ไทย" data-lang-en="Super Spa — Thai-Inspired Wellness &amp; Rejuvenation">Super Spa — สปาเพื่อสุขภาพและการฟื้นฟูสไตล์ไทย</title>
+<meta name="description" data-lang-th="Super Spa — สถานบำบัดสไตล์ไทยเพื่อการพักผ่อนและฟื้นฟูร่างกายใจกลางกรุงเทพฯ ด้วยศาสตร์การนวดและสมุนไพรดั้งเดิม" data-lang-en="Super Spa — a Thai-inspired sanctuary for relaxation and rejuvenation in Bangkok, rooted in traditional massage and herbal healing." content="Super Spa — สถานบำบัดสไตล์ไทยเพื่อการพักผ่อนและฟื้นฟูร่างกายใจกลางกรุงเทพฯ ด้วยศาสตร์การนวดและสมุนไพรดั้งเดิม" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <script src="https://unpkg.com/lucide@0.460.0"></script>
 <style>
   :root{
@@ -35,6 +36,8 @@
     font-size:17px;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    word-break:break-word;
+    overflow-wrap:break-word;
   }
 
   h1,h2,h3,h4{
@@ -130,6 +133,20 @@
   .btn.ghost:hover{border-color:var(--clay);color:var(--clay-deep);background:transparent;}
   .btn i{width:16px;height:16px;}
   .menu-toggle{display:none;background:none;border:none;color:var(--ink);cursor:pointer;}
+
+  /* ---------- language switcher ---------- */
+  .lang-switch{
+    display:inline-flex;align-items:center;
+    border:1px solid var(--line);border-radius:40px;overflow:hidden;
+  }
+  .lang-switch button{
+    font-family:'Jost',sans-serif;font-weight:400;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    padding:8px 13px;background:transparent;border:none;cursor:pointer;
+    color:var(--ink-soft);transition:background .3s,color .3s;line-height:1;
+  }
+  .lang-switch button:hover{color:var(--clay-deep);}
+  .lang-switch button.active{background:var(--clay);color:var(--paper);}
 
   /* ---------- hero ---------- */
   .hero{position:relative;padding:70px 0 90px;}
@@ -350,6 +367,27 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;}
   .reveal.in{opacity:1;transform:none;}
 
+  /* ---------- Thai typography ---------- */
+  html[lang="th"] body{
+    font-family:'Noto Sans Thai','Sukhumvit Set',sans-serif;
+  }
+  html[lang="th"] h1,
+  html[lang="th"] h2,
+  html[lang="th"] h3,
+  html[lang="th"] h4,
+  html[lang="th"] .testi blockquote{
+    font-family:'Noto Serif Thai','Sukhumvit Set',serif;
+  }
+  html[lang="th"] .eyebrow,
+  html[lang="th"] .btn,
+  html[lang="th"] .lang-switch button,
+  html[lang="th"] .foot-col h4{
+    font-family:'Noto Sans Thai','Sukhumvit Set',sans-serif;
+  }
+  html[lang="th"] .strip-track span{
+    font-family:'Noto Serif Thai','Sukhumvit Set',serif;
+  }
+
   /* ---------- responsive ---------- */
   @media(max-width:980px){
     .hero-grid{grid-template-columns:1fr;gap:50px;}
@@ -405,13 +443,17 @@
     <div class="wrap nav">
       <a href="#top" class="logo">Super&nbsp;Spa<span>Sukhumvit Wellness House</span></a>
       <nav class="nav-links">
-        <a href="#philosophy">Our Way</a>
-        <a href="#treatments">Treatments</a>
-        <a href="#journey">The Ritual</a>
-        <a href="#atmosphere">The House</a>
+        <a href="#philosophy" data-lang-th="ปรัชญาของเรา" data-lang-en="Our Way">ปรัชญาของเรา</a>
+        <a href="#treatments" data-lang-th="ทรีตเมนต์" data-lang-en="Treatments">ทรีตเมนต์</a>
+        <a href="#journey" data-lang-th="ขั้นตอนการบำบัด" data-lang-en="The Ritual">ขั้นตอนการบำบัด</a>
+        <a href="#atmosphere" data-lang-th="บรรยากาศ" data-lang-en="The House">บรรยากาศ</a>
       </nav>
-      <a href="#book" class="btn"><i data-lucide="calendar-heart"></i> Reserve</a>
-      <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <div class="lang-switch" role="group" aria-label="เลือกภาษา / Language">
+        <button type="button" data-set-lang="th">TH</button>
+        <button type="button" data-set-lang="en">EN</button>
+      </div>
+      <a href="#book" class="btn"><i data-lucide="calendar-heart"></i> <span data-lang-th="จองคิว" data-lang-en="Reserve">จองคิว</span></a>
+      <button class="menu-toggle" aria-label="เมนู" onclick="document.querySelector('.nav-links').classList.toggle('open')">
         <i data-lucide="menu"></i>
       </button>
     </div>
@@ -421,35 +463,35 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
-        <span class="eyebrow">Thai-Inspired Sanctuary</span>
-        <h1>Breathe slow,<br/>be <em>restored.</em></h1>
-        <p class="lead">A quiet refuge where ancient Thai healing meets unhurried care — warm hands, herbal steam, and the soft hush of stillness.</p>
+        <span class="eyebrow" data-lang-th="สถานบำบัดสไตล์ไทย" data-lang-en="Thai-Inspired Sanctuary">สถานบำบัดสไตล์ไทย</span>
+        <h1 data-lang-th="หายใจช้าๆ<br/>เพื่อการ<em>ฟื้นฟู</em>" data-lang-en="Breathe slow,<br/>be <em>restored.</em>">หายใจช้าๆ<br/>เพื่อการ<em>ฟื้นฟู</em></h1>
+        <p class="lead" data-lang-th="พื้นที่สงบที่ศาสตร์การบำบัดแบบไทยโบราณผสานเข้ากับการดูแลอย่างไม่เร่งรีบ — สัมผัสอบอุ่นจากมือ ไอน้ำสมุนไพร และความเงียบสงบอันแสนผ่อนคลาย" data-lang-en="A quiet refuge where ancient Thai healing meets unhurried care — warm hands, herbal steam, and the soft hush of stillness.">พื้นที่สงบที่ศาสตร์การบำบัดแบบไทยโบราณผสานเข้ากับการดูแลอย่างไม่เร่งรีบ — สัมผัสอบอุ่นจากมือ ไอน้ำสมุนไพร และความเงียบสงบอันแสนผ่อนคลาย</p>
         <div class="hero-actions">
-          <a href="#book" class="btn"><i data-lucide="leaf"></i> Begin your ritual</a>
-          <a href="#treatments" class="btn ghost">Explore treatments</a>
+          <a href="#book" class="btn"><i data-lucide="leaf"></i> <span data-lang-th="เริ่มการบำบัดของคุณ" data-lang-en="Begin your ritual">เริ่มการบำบัดของคุณ</span></a>
+          <a href="#treatments" class="btn ghost"><span data-lang-th="ดูทรีตเมนต์ทั้งหมด" data-lang-en="Explore treatments">ดูทรีตเมนต์ทั้งหมด</span></a>
         </div>
         <div class="hero-stats">
           <div>
             <div class="num">18</div>
-            <div class="lbl">Years of practice</div>
+            <div class="lbl" data-lang-th="ปีแห่งประสบการณ์" data-lang-en="Years of practice">ปีแห่งประสบการณ์</div>
           </div>
           <div>
             <div class="num">24</div>
-            <div class="lbl">Signature rituals</div>
+            <div class="lbl" data-lang-th="ทรีตเมนต์ซิกเนเจอร์" data-lang-en="Signature rituals">ทรีตเมนต์ซิกเนเจอร์</div>
           </div>
           <div>
             <div class="num">4.9</div>
-            <div class="lbl">Guest rating</div>
+            <div class="lbl" data-lang-th="คะแนนจากลูกค้า" data-lang-en="Guest rating">คะแนนจากลูกค้า</div>
           </div>
         </div>
       </div>
       <div class="hero-visual reveal">
         <div class="frame">
-          <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&h=1100&fit=crop" alt="Guest receiving a relaxing Thai spa treatment" />
+          <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&h=1100&fit=crop" alt="แขกกำลังรับบริการนวดสปาแบบไทยเพื่อการผ่อนคลาย" />
         </div>
         <div class="hero-badge">
           <div class="ic"><i data-lucide="flower-2"></i></div>
-          <p><strong>Hands-only healing</strong> Traditional techniques, no rush, no noise.</p>
+          <p data-lang-th="<strong>บำบัดด้วยมือล้วน</strong> เทคนิคดั้งเดิม ไม่เร่งรีบ ไร้เสียงรบกวน" data-lang-en="<strong>Hands-only healing</strong> Traditional techniques, no rush, no noise."><strong>บำบัดด้วยมือล้วน</strong> เทคนิคดั้งเดิม ไม่เร่งรีบ ไร้เสียงรบกวน</p>
         </div>
       </div>
     </div>
@@ -458,8 +500,8 @@
   <!-- MARQUEE STRIP -->
   <div class="strip" aria-hidden="true">
     <div class="strip-track">
-      <span>Herbal Compress</span><span>Warm Stone</span><span>Lotus Aromatherapy</span><span>Foot Reflexology</span><span>Thai Stretch</span><span>Jasmine Steam</span>
-      <span>Herbal Compress</span><span>Warm Stone</span><span>Lotus Aromatherapy</span><span>Foot Reflexology</span><span>Thai Stretch</span><span>Jasmine Steam</span>
+      <span data-lang-th="ลูกประคบสมุนไพร" data-lang-en="Herbal Compress">ลูกประคบสมุนไพร</span><span data-lang-th="นวดหินร้อน" data-lang-en="Warm Stone">นวดหินร้อน</span><span data-lang-th="อโรมาดอกบัว" data-lang-en="Lotus Aromatherapy">อโรมาดอกบัว</span><span data-lang-th="นวดกดจุดฝ่าเท้า" data-lang-en="Foot Reflexology">นวดกดจุดฝ่าเท้า</span><span data-lang-th="ยืดเหยียดแบบไทย" data-lang-en="Thai Stretch">ยืดเหยียดแบบไทย</span><span data-lang-th="อบไอน้ำมะลิ" data-lang-en="Jasmine Steam">อบไอน้ำมะลิ</span>
+      <span data-lang-th="ลูกประคบสมุนไพร" data-lang-en="Herbal Compress">ลูกประคบสมุนไพร</span><span data-lang-th="นวดหินร้อน" data-lang-en="Warm Stone">นวดหินร้อน</span><span data-lang-th="อโรมาดอกบัว" data-lang-en="Lotus Aromatherapy">อโรมาดอกบัว</span><span data-lang-th="นวดกดจุดฝ่าเท้า" data-lang-en="Foot Reflexology">นวดกดจุดฝ่าเท้า</span><span data-lang-th="ยืดเหยียดแบบไทย" data-lang-en="Thai Stretch">ยืดเหยียดแบบไทย</span><span data-lang-th="อบไอน้ำมะลิ" data-lang-en="Jasmine Steam">อบไอน้ำมะลิ</span>
     </div>
   </div>
 
@@ -467,18 +509,18 @@
   <section class="philosophy" id="philosophy">
     <div class="wrap phil-grid">
       <div class="phil-img-stack reveal">
-        <div class="a"><img src="https://images.unsplash.com/photo-1631277877896-4ce2b6770da5?w=700&h=850&fit=crop" alt="Smooth balanced stones" /></div>
-        <div class="b"><img src="https://images.unsplash.com/photo-1474557157379-8aa74a6ef541?w=600&h=500&fit=crop" alt="Lotus flower resting on still water" /></div>
+        <div class="a"><img src="https://images.unsplash.com/photo-1631277877896-4ce2b6770da5?w=700&h=850&fit=crop" alt="หินเรียบเรียงซ้อนกันอย่างสมดุล" /></div>
+        <div class="b"><img src="https://images.unsplash.com/photo-1474557157379-8aa74a6ef541?w=600&h=500&fit=crop" alt="ดอกบัวลอยอยู่บนผิวน้ำนิ่ง" /></div>
       </div>
       <div class="phil-text reveal">
-        <span class="eyebrow">Sabai, sabai</span>
-        <h2>Wellness in the <em>old, gentle way.</em></h2>
-        <p>At Super Spa, we follow the Thai philosophy of <em>sabai</em> — a state of ease in body and mind. Every treatment is paced to the rhythm of your breath, never the clock.</p>
-        <p>We blend hand-picked herbs, warm oils, and time-honoured pressure work to coax tension from where it hides. You arrive carrying the day; you leave lighter than you came.</p>
+        <span class="eyebrow" data-lang-th="สบาย สบาย" data-lang-en="Sabai, sabai">สบาย สบาย</span>
+        <h2 data-lang-th="สุขภาพดีในแบบ<em>ดั้งเดิมที่อ่อนโยน</em>" data-lang-en="Wellness in the <em>old, gentle way.</em>">สุขภาพดีในแบบ<em>ดั้งเดิมที่อ่อนโยน</em></h2>
+        <p data-lang-th="ที่ Super Spa เรายึดถือปรัชญาไทยแห่งคำว่า <em>สบาย</em> — สภาวะแห่งความผ่อนคลายทั้งกายและใจ ทุกทรีตเมนต์ดำเนินไปตามจังหวะลมหายใจของคุณ ไม่ใช่ตามเข็มนาฬิกา" data-lang-en="At Super Spa, we follow the Thai philosophy of <em>sabai</em> — a state of ease in body and mind. Every treatment is paced to the rhythm of your breath, never the clock.">ที่ Super Spa เรายึดถือปรัชญาไทยแห่งคำว่า <em>สบาย</em> — สภาวะแห่งความผ่อนคลายทั้งกายและใจ ทุกทรีตเมนต์ดำเนินไปตามจังหวะลมหายใจของคุณ ไม่ใช่ตามเข็มนาฬิกา</p>
+        <p data-lang-th="เราผสมผสานสมุนไพรคัดสรร น้ำมันอุ่น และศาสตร์การกดจุดอันสืบทอดมายาวนาน เพื่อคลายความตึงเครียดที่ซ่อนตัวอยู่ คุณมาถึงพร้อมความเหนื่อยล้าของทั้งวัน และจากไปด้วยความรู้สึกเบาสบายกว่าเดิม" data-lang-en="We blend hand-picked herbs, warm oils, and time-honoured pressure work to coax tension from where it hides. You arrive carrying the day; you leave lighter than you came.">เราผสมผสานสมุนไพรคัดสรร น้ำมันอุ่น และศาสตร์การกดจุดอันสืบทอดมายาวนาน เพื่อคลายความตึงเครียดที่ซ่อนตัวอยู่ คุณมาถึงพร้อมความเหนื่อยล้าของทั้งวัน และจากไปด้วยความรู้สึกเบาสบายกว่าเดิม</p>
         <ul class="phil-points">
-          <li><i data-lucide="sprout"></i><span><b>Botanical & natural.</b> Herbal compresses and oils blended in-house, free from synthetics.</span></li>
-          <li><i data-lucide="hand-heart"></i><span><b>Trained Thai therapists.</b> Lineage techniques passed through generations of practice.</span></li>
-          <li><i data-lucide="moon"></i><span><b>A truly quiet space.</b> Low light, soft sound, and time that belongs only to you.</span></li>
+          <li><i data-lucide="sprout"></i><span data-lang-th="<b>จากธรรมชาติล้วนๆ</b> ลูกประคบและน้ำมันสมุนไพรปรุงเองภายในร้าน ปราศจากสารสังเคราะห์" data-lang-en="<b>Botanical &amp; natural.</b> Herbal compresses and oils blended in-house, free from synthetics."><b>จากธรรมชาติล้วนๆ</b> ลูกประคบและน้ำมันสมุนไพรปรุงเองภายในร้าน ปราศจากสารสังเคราะห์</span></li>
+          <li><i data-lucide="hand-heart"></i><span data-lang-th="<b>นักบำบัดไทยผู้ชำนาญ</b> เทคนิคที่สืบทอดผ่านการฝึกฝนจากรุ่นสู่รุ่น" data-lang-en="<b>Trained Thai therapists.</b> Lineage techniques passed through generations of practice."><b>นักบำบัดไทยผู้ชำนาญ</b> เทคนิคที่สืบทอดผ่านการฝึกฝนจากรุ่นสู่รุ่น</span></li>
+          <li><i data-lucide="moon"></i><span data-lang-th="<b>พื้นที่ที่เงียบสงบอย่างแท้จริง</b> แสงสลัว เสียงแผ่วเบา และเวลาที่เป็นของคุณเพียงผู้เดียว" data-lang-en="<b>A truly quiet space.</b> Low light, soft sound, and time that belongs only to you."><b>พื้นที่ที่เงียบสงบอย่างแท้จริง</b> แสงสลัว เสียงแผ่วเบา และเวลาที่เป็นของคุณเพียงผู้เดียว</span></li>
         </ul>
       </div>
     </div>
@@ -488,45 +530,45 @@
   <section class="treatments" id="treatments">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow center">Signature Rituals</span>
-        <h2>Treatments to <em>melt the day away</em></h2>
-        <p>Each ritual is a small journey — chosen to soothe the body, settle the mind, and return you to ease.</p>
+        <span class="eyebrow center" data-lang-th="ทรีตเมนต์ซิกเนเจอร์" data-lang-en="Signature Rituals">ทรีตเมนต์ซิกเนเจอร์</span>
+        <h2 data-lang-th="ทรีตเมนต์ที่ช่วย<em>ผ่อนคลายทั้งวัน</em>" data-lang-en="Treatments to <em>melt the day away</em>">ทรีตเมนต์ที่ช่วย<em>ผ่อนคลายทั้งวัน</em></h2>
+        <p data-lang-th="แต่ละทรีตเมนต์คือการเดินทางเล็กๆ — คัดสรรมาเพื่อปลอบประโลมร่างกาย สงบจิตใจ และนำคุณกลับสู่ความผ่อนคลาย" data-lang-en="Each ritual is a small journey — chosen to soothe the body, settle the mind, and return you to ease.">แต่ละทรีตเมนต์คือการเดินทางเล็กๆ — คัดสรรมาเพื่อปลอบประโลมร่างกาย สงบจิตใจ และนำคุณกลับสู่ความผ่อนคลาย</p>
       </div>
       <div class="cards">
         <article class="card reveal">
-          <div class="card-img"><img src="https://images.unsplash.com/photo-1610402601271-5b4bd5b3eba4?w=600&h=560&fit=crop" alt="Traditional Thai massage" /></div>
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1610402601271-5b4bd5b3eba4?w=600&h=560&fit=crop" alt="การนวดแผนไทยแบบดั้งเดิม" /></div>
           <div class="card-body">
             <div class="meta">
-              <span class="time"><i data-lucide="clock"></i> 90 min</span>
+              <span class="time"><i data-lucide="clock"></i> <span data-lang-th="90 นาที" data-lang-en="90 min">90 นาที</span></span>
               <span class="price">$120</span>
             </div>
-            <h3>Traditional Thai</h3>
-            <p>Rhythmic stretching and acupressure along the body's energy lines to release deep-held tension.</p>
-            <a href="#book" class="card-link">Reserve this <i data-lucide="arrow-right"></i></a>
+            <h3 data-lang-th="นวดแผนไทย" data-lang-en="Traditional Thai">นวดแผนไทย</h3>
+            <p data-lang-th="การยืดเหยียดเป็นจังหวะและการกดจุดตามแนวเส้นพลังงานของร่างกาย เพื่อคลายความตึงเครียดที่ฝังลึก" data-lang-en="Rhythmic stretching and acupressure along the body's energy lines to release deep-held tension.">การยืดเหยียดเป็นจังหวะและการกดจุดตามแนวเส้นพลังงานของร่างกาย เพื่อคลายความตึงเครียดที่ฝังลึก</p>
+            <a href="#book" class="card-link"><span data-lang-th="จองทรีตเมนต์นี้" data-lang-en="Reserve this">จองทรีตเมนต์นี้</span> <i data-lucide="arrow-right"></i></a>
           </div>
         </article>
         <article class="card reveal">
-          <div class="card-img"><img src="https://images.unsplash.com/photo-1543134968-8752069dbf58?w=600&h=560&fit=crop" alt="Herbal compress treatment with water lilies" /></div>
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1543134968-8752069dbf58?w=600&h=560&fit=crop" alt="ทรีตเมนต์ลูกประคบสมุนไพรพร้อมดอกบัว" /></div>
           <div class="card-body">
             <div class="meta">
-              <span class="time"><i data-lucide="clock"></i> 75 min</span>
+              <span class="time"><i data-lucide="clock"></i> <span data-lang-th="75 นาที" data-lang-en="75 min">75 นาที</span></span>
               <span class="price">$135</span>
             </div>
-            <h3>Herbal Compress</h3>
-            <p>Steamed muslin pouches of lemongrass, ginger and kaffir lime pressed warm into tired muscles.</p>
-            <a href="#book" class="card-link">Reserve this <i data-lucide="arrow-right"></i></a>
+            <h3 data-lang-th="ลูกประคบสมุนไพร" data-lang-en="Herbal Compress">ลูกประคบสมุนไพร</h3>
+            <p data-lang-th="ลูกประคบผ้ามัสลินอบไอน้ำบรรจุตะไคร้ ขิง และมะกรูด กดอุ่นๆ ลงบนกล้ามเนื้อที่อ่อนล้า" data-lang-en="Steamed muslin pouches of lemongrass, ginger and kaffir lime pressed warm into tired muscles.">ลูกประคบผ้ามัสลินอบไอน้ำบรรจุตะไคร้ ขิง และมะกรูด กดอุ่นๆ ลงบนกล้ามเนื้อที่อ่อนล้า</p>
+            <a href="#book" class="card-link"><span data-lang-th="จองทรีตเมนต์นี้" data-lang-en="Reserve this">จองทรีตเมนต์นี้</span> <i data-lucide="arrow-right"></i></a>
           </div>
         </article>
         <article class="card reveal">
-          <div class="card-img"><img src="https://images.unsplash.com/photo-1556760544-74068565f05c?w=600&h=560&fit=crop" alt="Aromatherapy candle and warm oils" /></div>
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1556760544-74068565f05c?w=600&h=560&fit=crop" alt="เทียนหอมอโรมาและน้ำมันอุ่น" /></div>
           <div class="card-body">
             <div class="meta">
-              <span class="time"><i data-lucide="clock"></i> 60 min</span>
+              <span class="time"><i data-lucide="clock"></i> <span data-lang-th="60 นาที" data-lang-en="60 min">60 นาที</span></span>
               <span class="price">$110</span>
             </div>
-            <h3>Lotus Aromatherapy</h3>
-            <p>Warm botanical oils and slow effleurage carry you into a state of weightless, drifting calm.</p>
-            <a href="#book" class="card-link">Reserve this <i data-lucide="arrow-right"></i></a>
+            <h3 data-lang-th="อโรมาเธอราพีดอกบัว" data-lang-en="Lotus Aromatherapy">อโรมาเธอราพีดอกบัว</h3>
+            <p data-lang-th="น้ำมันหอมระเหยจากพืชอุ่นๆ และการลูบไล้อย่างแผ่วเบา พาคุณเข้าสู่ความสงบที่ล่องลอยไร้น้ำหนัก" data-lang-en="Warm botanical oils and slow effleurage carry you into a state of weightless, drifting calm.">น้ำมันหอมระเหยจากพืชอุ่นๆ และการลูบไล้อย่างแผ่วเบา พาคุณเข้าสู่ความสงบที่ล่องลอยไร้น้ำหนัก</p>
+            <a href="#book" class="card-link"><span data-lang-th="จองทรีตเมนต์นี้" data-lang-en="Reserve this">จองทรีตเมนต์นี้</span> <i data-lucide="arrow-right"></i></a>
           </div>
         </article>
       </div>
@@ -537,29 +579,29 @@
   <section class="journey" id="journey">
     <div class="wrap">
       <div class="journey-head reveal">
-        <h2>Your <em>ritual</em>, from arrival to afterglow</h2>
-        <p>We design every visit as four unhurried movements — there is nothing to do but let go.</p>
+        <h2 data-lang-th="<em>การบำบัด</em>ของคุณ ตั้งแต่ก้าวแรกจนถึงความสุขสงบหลังเสร็จสิ้น" data-lang-en="Your <em>ritual</em>, from arrival to afterglow"><em>การบำบัด</em>ของคุณ ตั้งแต่ก้าวแรกจนถึงความสุขสงบหลังเสร็จสิ้น</h2>
+        <p data-lang-th="เราออกแบบทุกการมาเยือนเป็นสี่ช่วงเวลาอันแสนผ่อนคลาย — ไม่ต้องทำสิ่งใด เพียงแค่ปล่อยวาง" data-lang-en="We design every visit as four unhurried movements — there is nothing to do but let go.">เราออกแบบทุกการมาเยือนเป็นสี่ช่วงเวลาอันแสนผ่อนคลาย — ไม่ต้องทำสิ่งใด เพียงแค่ปล่อยวาง</p>
       </div>
       <div class="steps">
         <div class="step reveal">
           <div class="no">01</div>
-          <h3>Welcome tea</h3>
-          <p>Arrive early, slip off your shoes, and settle with a warm cup of pandan-jasmine tea.</p>
+          <h3 data-lang-th="ชาต้อนรับ" data-lang-en="Welcome tea">ชาต้อนรับ</h3>
+          <p data-lang-th="มาถึงแต่เนิ่นๆ ถอดรองเท้า แล้วผ่อนคลายกับชาใบเตยมะลิอุ่นๆ สักถ้วย" data-lang-en="Arrive early, slip off your shoes, and settle with a warm cup of pandan-jasmine tea.">มาถึงแต่เนิ่นๆ ถอดรองเท้า แล้วผ่อนคลายกับชาใบเตยมะลิอุ่นๆ สักถ้วย</p>
         </div>
         <div class="step reveal">
           <div class="no">02</div>
-          <h3>Foot cleanse</h3>
-          <p>A gentle herbal foot ritual to soften the threshold between the city and our quiet.</p>
+          <h3 data-lang-th="ชำระล้างเท้า" data-lang-en="Foot cleanse">ชำระล้างเท้า</h3>
+          <p data-lang-th="พิธีล้างเท้าด้วยสมุนไพรอย่างอ่อนโยน เพื่อเปลี่ยนผ่านจากความวุ่นวายของเมืองสู่ความเงียบสงบของเรา" data-lang-en="A gentle herbal foot ritual to soften the threshold between the city and our quiet.">พิธีล้างเท้าด้วยสมุนไพรอย่างอ่อนโยน เพื่อเปลี่ยนผ่านจากความวุ่นวายของเมืองสู่ความเงียบสงบของเรา</p>
         </div>
         <div class="step reveal">
           <div class="no">03</div>
-          <h3>The treatment</h3>
-          <p>Your chosen ritual, paced entirely to your breath in a softly lit private room.</p>
+          <h3 data-lang-th="ช่วงการบำบัด" data-lang-en="The treatment">ช่วงการบำบัด</h3>
+          <p data-lang-th="ทรีตเมนต์ที่คุณเลือก ดำเนินไปตามจังหวะลมหายใจของคุณ ในห้องส่วนตัวแสงนวล" data-lang-en="Your chosen ritual, paced entirely to your breath in a softly lit private room.">ทรีตเมนต์ที่คุณเลือก ดำเนินไปตามจังหวะลมหายใจของคุณ ในห้องส่วนตัวแสงนวล</p>
         </div>
         <div class="step reveal">
           <div class="no">04</div>
-          <h3>Slow return</h3>
-          <p>Linger in the resting lounge with tea and time, until you feel ready for the world again.</p>
+          <h3 data-lang-th="กลับคืนอย่างช้าๆ" data-lang-en="Slow return">กลับคืนอย่างช้าๆ</h3>
+          <p data-lang-th="พักผ่อนในเลานจ์พร้อมชาและเวลา จนกว่าคุณจะพร้อมกลับสู่โลกภายนอกอีกครั้ง" data-lang-en="Linger in the resting lounge with tea and time, until you feel ready for the world again.">พักผ่อนในเลานจ์พร้อมชาและเวลา จนกว่าคุณจะพร้อมกลับสู่โลกภายนอกอีกครั้ง</p>
         </div>
       </div>
     </div>
@@ -569,20 +611,20 @@
   <section class="atmosphere" id="atmosphere">
     <div class="inner">
       <div class="copy reveal">
-        <span class="eyebrow">The House</span>
-        <h2>A space built for <em>stillness</em></h2>
-        <p>Reclaimed teak, warm clay walls, and the low murmur of water. Our house is designed to slow the senses the moment you step inside.</p>
-        <p>Every detail — the scent of jasmine, the hush of soft light — is chosen to let the mind finally rest.</p>
+        <span class="eyebrow" data-lang-th="บรรยากาศ" data-lang-en="The House">บรรยากาศ</span>
+        <h2 data-lang-th="พื้นที่ที่สร้างขึ้นเพื่อ<em>ความสงบนิ่ง</em>" data-lang-en="A space built for <em>stillness</em>">พื้นที่ที่สร้างขึ้นเพื่อ<em>ความสงบนิ่ง</em></h2>
+        <p data-lang-th="ไม้สักรีไซเคิล ผนังดินเผาโทนอุ่น และเสียงน้ำไหลแผ่วเบา บ้านของเราถูกออกแบบให้ผ่อนคลายทุกประสาทสัมผัสตั้งแต่ก้าวแรกที่ก้าวเข้ามา" data-lang-en="Reclaimed teak, warm clay walls, and the low murmur of water. Our house is designed to slow the senses the moment you step inside.">ไม้สักรีไซเคิล ผนังดินเผาโทนอุ่น และเสียงน้ำไหลแผ่วเบา บ้านของเราถูกออกแบบให้ผ่อนคลายทุกประสาทสัมผัสตั้งแต่ก้าวแรกที่ก้าวเข้ามา</p>
+        <p data-lang-th="ทุกรายละเอียด — กลิ่นหอมของดอกมะลิ ความเงียบสงบของแสงนวล — ถูกเลือกสรรมาเพื่อให้จิตใจได้พักผ่อนอย่างแท้จริง" data-lang-en="Every detail — the scent of jasmine, the hush of soft light — is chosen to let the mind finally rest.">ทุกรายละเอียด — กลิ่นหอมของดอกมะลิ ความเงียบสงบของแสงนวล — ถูกเลือกสรรมาเพื่อให้จิตใจได้พักผ่อนอย่างแท้จริง</p>
         <div class="amen">
-          <span><i data-lucide="droplets"></i> Herbal steam room</span>
-          <span><i data-lucide="flame"></i> Heated stone beds</span>
-          <span><i data-lucide="cup-soda"></i> Tea lounge</span>
-          <span><i data-lucide="volume-x"></i> Sound-quiet rooms</span>
+          <span><i data-lucide="droplets"></i> <span data-lang-th="ห้องอบไอน้ำสมุนไพร" data-lang-en="Herbal steam room">ห้องอบไอน้ำสมุนไพร</span></span>
+          <span><i data-lucide="flame"></i> <span data-lang-th="เตียงหินอุ่น" data-lang-en="Heated stone beds">เตียงหินอุ่น</span></span>
+          <span><i data-lucide="cup-soda"></i> <span data-lang-th="เลานจ์จิบชา" data-lang-en="Tea lounge">เลานจ์จิบชา</span></span>
+          <span><i data-lucide="volume-x"></i> <span data-lang-th="ห้องเก็บเสียงเงียบสงบ" data-lang-en="Sound-quiet rooms">ห้องเก็บเสียงเงียบสงบ</span></span>
         </div>
       </div>
       <div class="pics">
-        <img src="https://images.unsplash.com/photo-1772616748530-7cd73053f326?w=800&h=420&fit=crop" alt="Warm wooden sauna interior with ambient lighting" />
-        <img src="https://images.unsplash.com/photo-1643122966676-29e8597257f7?w=800&h=420&fit=crop" alt="Cluster of warm glowing candles" />
+        <img src="https://images.unsplash.com/photo-1772616748530-7cd73053f326?w=800&h=420&fit=crop" alt="ภายในห้องซาวน่าไม้โทนอุ่นพร้อมแสงไฟนวล" />
+        <img src="https://images.unsplash.com/photo-1643122966676-29e8597257f7?w=800&h=420&fit=crop" alt="กลุ่มเทียนเรืองแสงโทนอุ่น" />
       </div>
     </div>
   </section>
@@ -594,8 +636,8 @@
       <div class="stars">
         <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
       </div>
-      <blockquote>I came in wound tight from a brutal week and left feeling like I'd been on holiday for a month. Super Spa isn't a treatment — it's a <em>quiet reset for the soul.</em></blockquote>
-      <div class="author"><b>Naree P.</b> &nbsp;—&nbsp; Returning guest, 3 years</div>
+      <blockquote data-lang-th="ฉันมาถึงด้วยความเครียดสะสมจากสัปดาห์อันโหดร้าย และกลับออกไปด้วยความรู้สึกราวกับได้ไปพักร้อนมาทั้งเดือน Super Spa ไม่ใช่แค่ทรีตเมนต์ — แต่คือ<em>การรีเซ็ตจิตใจอย่างเงียบสงบ</em>" data-lang-en="I came in wound tight from a brutal week and left feeling like I'd been on holiday for a month. Super Spa isn't a treatment — it's a <em>quiet reset for the soul.</em>">ฉันมาถึงด้วยความเครียดสะสมจากสัปดาห์อันโหดร้าย และกลับออกไปด้วยความรู้สึกราวกับได้ไปพักร้อนมาทั้งเดือน Super Spa ไม่ใช่แค่ทรีตเมนต์ — แต่คือ<em>การรีเซ็ตจิตใจอย่างเงียบสงบ</em></blockquote>
+      <div class="author" data-lang-th="<b>Naree P.</b> &nbsp;—&nbsp; ลูกค้าประจำ 3 ปี" data-lang-en="<b>Naree P.</b> &nbsp;—&nbsp; Returning guest, 3 years"><b>Naree P.</b> &nbsp;—&nbsp; ลูกค้าประจำ 3 ปี</div>
     </div>
   </section>
 
@@ -604,20 +646,20 @@
     <div class="wrap">
       <div class="cta-box reveal">
         <div class="text">
-          <span class="eyebrow">Reserve Your Time</span>
-          <h2>Give yourself an <em>hour of peace</em></h2>
-          <p>Booking takes a moment. We'll hold a quiet room, a warm tea, and a therapist ready to take the weight off.</p>
+          <span class="eyebrow" data-lang-th="จองเวลาของคุณ" data-lang-en="Reserve Your Time">จองเวลาของคุณ</span>
+          <h2 data-lang-th="มอบ<em>ชั่วโมงแห่งความสงบ</em>ให้กับตัวคุณเอง" data-lang-en="Give yourself an <em>hour of peace</em>">มอบ<em>ชั่วโมงแห่งความสงบ</em>ให้กับตัวคุณเอง</h2>
+          <p data-lang-th="การจองใช้เวลาเพียงครู่เดียว เราจะเตรียมห้องที่เงียบสงบ ชาอุ่นๆ และนักบำบัดที่พร้อมปลดเปลื้องความเหนื่อยล้าไว้ให้คุณ" data-lang-en="Booking takes a moment. We'll hold a quiet room, a warm tea, and a therapist ready to take the weight off.">การจองใช้เวลาเพียงครู่เดียว เราจะเตรียมห้องที่เงียบสงบ ชาอุ่นๆ และนักบำบัดที่พร้อมปลดเปลื้องความเหนื่อยล้าไว้ให้คุณ</p>
           <div class="row">
-            <div class="item"><i data-lucide="map-pin"></i> 88 Sukhumvit Soi, Bangkok</div>
-            <div class="item"><i data-lucide="clock"></i> Daily · 10am – 10pm</div>
+            <div class="item"><i data-lucide="map-pin"></i> <span data-lang-th="88 ซอยสุขุมวิท กรุงเทพฯ" data-lang-en="88 Sukhumvit Soi, Bangkok">88 ซอยสุขุมวิท กรุงเทพฯ</span></div>
+            <div class="item"><i data-lucide="clock"></i> <span data-lang-th="ทุกวัน · 10:00 – 22:00 น." data-lang-en="Daily · 10am – 10pm">ทุกวัน · 10:00 – 22:00 น.</span></div>
           </div>
           <div class="hero-actions">
-            <a href="tel:+6620000000" class="btn"><i data-lucide="phone"></i> Call to book</a>
-            <a href="#" class="btn ghost" style="color:var(--paper);border-color:rgba(251,246,239,.5);"><i data-lucide="calendar"></i> Book online</a>
+            <a href="tel:+6620000000" class="btn"><i data-lucide="phone"></i> <span data-lang-th="โทรเพื่อจอง" data-lang-en="Call to book">โทรเพื่อจอง</span></a>
+            <a href="#" class="btn ghost" style="color:var(--paper);border-color:rgba(251,246,239,.5);"><i data-lucide="calendar"></i> <span data-lang-th="จองออนไลน์" data-lang-en="Book online">จองออนไลน์</span></a>
           </div>
         </div>
         <div class="img">
-          <img src="https://images.unsplash.com/photo-1594882471743-2758d2ce5f00?w=700&h=800&fit=crop" alt="Pink lotus flower in bloom" />
+          <img src="https://images.unsplash.com/photo-1594882471743-2758d2ce5f00?w=700&h=800&fit=crop" alt="ดอกบัวสีชมพูกำลังเบ่งบาน" />
         </div>
       </div>
     </div>
@@ -629,49 +671,75 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <div class="logo">Super&nbsp;Spa<span>Sukhumvit Wellness House</span></div>
-          <p>A Thai-inspired sanctuary for relaxation and rejuvenation — where time slows and the body remembers how to rest.</p>
+          <p data-lang-th="สถานบำบัดสไตล์ไทยเพื่อการพักผ่อนและฟื้นฟูร่างกาย — ที่ซึ่งเวลาเดินช้าลง และร่างกายได้เรียนรู้การพักผ่อนอีกครั้ง" data-lang-en="A Thai-inspired sanctuary for relaxation and rejuvenation — where time slows and the body remembers how to rest.">สถานบำบัดสไตล์ไทยเพื่อการพักผ่อนและฟื้นฟูร่างกาย — ที่ซึ่งเวลาเดินช้าลง และร่างกายได้เรียนรู้การพักผ่อนอีกครั้ง</p>
           <div class="foot-socials">
             <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
             <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-            <a href="#" aria-label="Send a message"><i data-lucide="send"></i></a>
+            <a href="#" aria-label="ส่งข้อความ"><i data-lucide="send"></i></a>
           </div>
         </div>
         <div class="foot-col">
-          <h4>Explore</h4>
+          <h4 data-lang-th="สำรวจ" data-lang-en="Explore">สำรวจ</h4>
           <ul>
-            <li><a href="#philosophy">Our Way</a></li>
-            <li><a href="#treatments">Treatments</a></li>
-            <li><a href="#journey">The Ritual</a></li>
-            <li><a href="#atmosphere">The House</a></li>
+            <li><a href="#philosophy" data-lang-th="ปรัชญาของเรา" data-lang-en="Our Way">ปรัชญาของเรา</a></li>
+            <li><a href="#treatments" data-lang-th="ทรีตเมนต์" data-lang-en="Treatments">ทรีตเมนต์</a></li>
+            <li><a href="#journey" data-lang-th="ขั้นตอนการบำบัด" data-lang-en="The Ritual">ขั้นตอนการบำบัด</a></li>
+            <li><a href="#atmosphere" data-lang-th="บรรยากาศ" data-lang-en="The House">บรรยากาศ</a></li>
           </ul>
         </div>
         <div class="foot-col">
-          <h4>Rituals</h4>
+          <h4 data-lang-th="ทรีตเมนต์" data-lang-en="Rituals">ทรีตเมนต์</h4>
           <ul>
-            <li><a href="#treatments">Traditional Thai</a></li>
-            <li><a href="#treatments">Herbal Compress</a></li>
-            <li><a href="#treatments">Lotus Aromatherapy</a></li>
-            <li><a href="#treatments">Foot Reflexology</a></li>
+            <li><a href="#treatments" data-lang-th="นวดแผนไทย" data-lang-en="Traditional Thai">นวดแผนไทย</a></li>
+            <li><a href="#treatments" data-lang-th="ลูกประคบสมุนไพร" data-lang-en="Herbal Compress">ลูกประคบสมุนไพร</a></li>
+            <li><a href="#treatments" data-lang-th="อโรมาเธอราพีดอกบัว" data-lang-en="Lotus Aromatherapy">อโรมาเธอราพีดอกบัว</a></li>
+            <li><a href="#treatments" data-lang-th="นวดกดจุดฝ่าเท้า" data-lang-en="Foot Reflexology">นวดกดจุดฝ่าเท้า</a></li>
           </ul>
         </div>
         <div class="foot-col">
-          <h4>Visit</h4>
+          <h4 data-lang-th="เยี่ยมชม" data-lang-en="Visit">เยี่ยมชม</h4>
           <ul>
-            <li class="contact-item"><i data-lucide="map-pin"></i> 88 Sukhumvit Soi,<br/>Bangkok 10110</li>
+            <li class="contact-item"><i data-lucide="map-pin"></i> <span data-lang-th="88 ซอยสุขุมวิท,<br/>กรุงเทพฯ 10110" data-lang-en="88 Sukhumvit Soi,<br/>Bangkok 10110">88 ซอยสุขุมวิท,<br/>กรุงเทพฯ 10110</span></li>
             <li class="contact-item"><i data-lucide="phone"></i> +66 2 000 0000</li>
             <li class="contact-item"><i data-lucide="mail"></i> hello@superspa.co</li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">
-        <span>© 2026 Super Spa. All rights reserved.</span>
-        <span>Crafted for stillness · Privacy · Terms</span>
+        <span data-lang-th="© 2026 Super Spa สงวนลิขสิทธิ์" data-lang-en="© 2026 Super Spa. All rights reserved.">© 2026 Super Spa สงวนลิขสิทธิ์</span>
+        <span data-lang-th="สร้างสรรค์เพื่อความสงบ · ความเป็นส่วนตัว · เงื่อนไข" data-lang-en="Crafted for stillness · Privacy · Terms">สร้างสรรค์เพื่อความสงบ · ความเป็นส่วนตัว · เงื่อนไข</span>
       </div>
     </div>
   </footer>
 
   <script>
     lucide.createIcons();
+
+    // ---------- language switcher ----------
+    function applyLang(lang){
+      document.documentElement.setAttribute('lang', lang);
+      document.querySelectorAll('[data-lang-' + lang + ']').forEach(function(el){
+        var val = el.getAttribute('data-lang-' + lang);
+        if (val === null) return;
+        if (el.tagName === 'META') { el.setAttribute('content', val); }
+        else { el.innerHTML = val; }
+      });
+      document.querySelectorAll('.lang-switch button').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    var savedLang = 'th';
+    try { savedLang = localStorage.getItem('lang') || 'th'; } catch (e) {}
+    if (savedLang !== 'en' && savedLang !== 'th') savedLang = 'th';
+    applyLang(savedLang);
+
+    document.querySelectorAll('.lang-switch button').forEach(function(b){
+      b.addEventListener('click', function(){
+        applyLang(b.getAttribute('data-set-lang'));
+      });
+    });
 
     // header border on scroll
     const header = document.getElementById('top');
