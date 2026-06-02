@@ -405,19 +405,22 @@
     .cta-box .img{min-height:280px;}
     .cta-box .img img{min-height:280px;}
     .foot-grid{grid-template-columns:1fr 1fr;gap:40px;}
-  }
-  @media(max-width:680px){
-    .wrap{padding:0 22px;}
-    body{font-size:16px;}
+    /* collapse nav to hamburger early — Thai labels are wider than English
+       and overflow the bar on portrait-tablet widths */
     .nav-links{
       display:none;position:absolute;top:84px;left:0;right:0;
       flex-direction:column;gap:0;background:var(--paper);
-      border-bottom:1px solid var(--line);padding:10px 22px 22px;
+      border-bottom:1px solid var(--line);padding:10px 32px 22px;
     }
     .nav-links.open{display:flex;}
     .nav-links a{padding:16px 0;border-bottom:1px solid var(--line);width:100%;}
     .menu-toggle{display:flex;}
     .nav .btn{display:none;}
+  }
+  @media(max-width:680px){
+    .wrap{padding:0 22px;}
+    body{font-size:16px;}
+    .nav-links{padding-left:22px;padding-right:22px;}
     .hero{padding:46px 0 60px;}
     .hero-stats{gap:30px;flex-wrap:wrap;}
     .hero-visual .frame img{height:460px;}
